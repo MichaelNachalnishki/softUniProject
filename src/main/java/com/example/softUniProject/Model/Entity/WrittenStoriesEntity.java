@@ -6,7 +6,7 @@ import jakarta.persistence.Entity;
 @Entity
 public class WrittenStoriesEntity extends BaseEntity{
 
-   private String name;
+    private String name;
     private String author;
 
     public String getAuthor() {

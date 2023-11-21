@@ -12,6 +12,7 @@ public class StoryEntity extends BaseEntity{
     private UserEntity authorName;
     private String storyName;
     private String storyContent;
+    private int likes;
     @Enumerated(EnumType.STRING)
     private AgeRestrictionEnum ageRestriction;
     @Enumerated(EnumType.STRING)
@@ -19,6 +20,13 @@ public class StoryEntity extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private GenresEnum genre;
 
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
 
     public UserEntity getAuthorName() {
         return authorName;
