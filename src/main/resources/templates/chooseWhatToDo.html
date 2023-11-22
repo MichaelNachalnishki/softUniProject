@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Action</title>
+
+</head>
+<body>
+    <div class="container">
+        <div class="box" onclick="selectAction('read')">Read</div>
+        <div class="box" onclick="selectAction('write')">Write</div>
+    </div>
+
+    <script>
+        function selectAction(action) {
+            alert("You chose to " + action + ".");
+            // You can perform other actions based on the user's choice here
+        }
+    </script>
+</body>
+</html>

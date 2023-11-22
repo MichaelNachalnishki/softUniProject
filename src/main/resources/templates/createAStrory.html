@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>Sample</head>
+<body>
+<main>
+    <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Create Story</span></h1>
+    <hr class="hr-3 w-25 bg-white"/>
+
+    <form class="mx-auto w-25 bg-blur rounded" th:method="POST" th:action="@{/story/create}"
+          th:object="${storyAddBindingModel}">
+
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label  class="h4 mb-2">Name</label>
+                <textarea type="text" errorclass="bg-danger"> </textarea>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label  class="h4 mb-2">Content</label>
+            </div>
+            <textarea type="text" errorclass="bg-danger"> </textarea>
+            <small></small>
+        </div>
+
+        <div class="form-group">
+            <div class="text-white label-holder d-flex justify-content-center">
+                <label for="priority" class="h4 mb-2">Age testriction</label>
+            </div>
+            <select class="browser-default custom-select" id="priority"  th:errorclass="bg-danger">
+                <option value="">Select age restricton</option>
+                <option value="KIDS">Kids</option>
+                <option value="ADULTS">Adults</option>
+                <option value="TEEN">Teen</option>
+                <option value="EVERYONE">Everyone</option>
+            </select>
+
+        </div>
+
+        <div class="form-group">
+            <label class="text-white font-weight-bold" for="imageUrl">Image URL</label>
+            <input id="imageUrl"
+                   name="imageUrl"
+                   type="url" class="form-control"
+                   placeholder="Put vehicle image URL here">
+        </div>
+
+
+        <div class="button-holder d-flex justify-content-center">
+            <button type="submit" class="btn btn-warning  mb-3" value="Register" >Add story</button>
+        </div>
+
+    </form>
+</main>
+
+<footer></footer>
+
+</body>
+</html>
