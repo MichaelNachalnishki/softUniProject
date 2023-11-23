@@ -1,4 +1,4 @@
-package com.example.softUniProject.Model.Entity;
+package com.example.softUniProject.model.Entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

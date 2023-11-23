@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head th:replace="commons::head">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Writing Website</title>
 </head>
 <body>
 
-    <header>
+    <header th:replace="commons::nav">
         <h1>Your Writing Website</h1>
-        <p><b>Welcome to Write your story!</p>
+        <p>Welcome to Write your story!</p>
     </header>
 
     <section>
@@ -19,6 +19,14 @@
         <h2>Featured Articles</h2>
         <p>Highlight some of your best or latest articles. Provide a glimpse into the diverse topics your writers cover.</p>
     </section>
+    <div>
+        <h3>
+            <a class="text-primary" th:href="@{/login}">Login</a>
+            if you have an account or
+            <a class="text-primary" th:href="@{/register}">Register</a>
+            now and read stories form independent authors.
+        </h3>
+    </div>
 
     <footer>
         <p>&copy; 2023 Your Writing Website. All rights reserved.</p>

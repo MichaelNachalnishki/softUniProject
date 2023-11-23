@@ -1,6 +1,6 @@
-package com.example.softUniProject.Model.Entity;
+package com.example.softUniProject.model.Entity;
 
-import com.example.softUniProject.Model.Enums.RolesEnum;
+import com.example.softUniProject.model.Enums.RolesEnum;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

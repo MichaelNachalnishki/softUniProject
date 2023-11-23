@@ -7,7 +7,7 @@
 
 </head>
 <body>
-    <form action="/register" method="post">
+    <form th:action="@{/register}" method="POST">
         <h2>User Registration</h2>
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>

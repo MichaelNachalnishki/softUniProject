@@ -1,31 +1,27 @@
-package com.example.softUniProject.Model.Entity;
+package com.example.softUniProject.model.dto;
 
-import com.example.softUniProject.Model.Enums.AgeRestrictionEnum;
-import com.example.softUniProject.Model.Enums.GenresEnum;
-import com.example.softUniProject.Model.Enums.StatusEnum;
-import jakarta.persistence.*;
+import com.example.softUniProject.model.Entity.StoryEntity;
+import com.example.softUniProject.model.Entity.UserEntity;
+import com.example.softUniProject.model.Enums.AgeRestrictionEnum;
+import com.example.softUniProject.model.Enums.GenresEnum;
 
-@Entity
-public class StoryEntity extends BaseEntity{
 
-    @ManyToOne
+public class StoryDTO {
+
+    private Long id;
     private UserEntity authorName;
     private String storyName;
     private String storyContent;
     private int likes;
-    @Enumerated(EnumType.STRING)
     private AgeRestrictionEnum ageRestriction;
-    @Enumerated(EnumType.STRING)
-    private StatusEnum status;
-    @Enumerated(EnumType.STRING)
     private GenresEnum genre;
 
-    public int getLikes() {
-        return likes;
+    public Long getId() {
+        return id;
     }
 
-    public void setLikes(int likes) {
-        this.likes = likes;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public UserEntity getAuthorName() {
@@ -52,6 +48,14 @@ public class StoryEntity extends BaseEntity{
         this.storyContent = storyContent;
     }
 
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
     public AgeRestrictionEnum getAgeRestriction() {
         return ageRestriction;
     }
@@ -60,13 +64,6 @@ public class StoryEntity extends BaseEntity{
         this.ageRestriction = ageRestriction;
     }
 
-    public StatusEnum getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusEnum status) {
-        this.status = status;
-    }
 
     public GenresEnum getGenre() {
         return genre;
@@ -74,5 +71,20 @@ public class StoryEntity extends BaseEntity{
 
     public void setGenre(GenresEnum genre) {
         this.genre = genre;
+    }
+
+
+    public static StoryDTO createFormStory(StoryEntity story){
+        StoryDTO storyDTO = new StoryDTO();
+        storyDTO.setId(story.getId());
+        storyDTO.setStoryContent(story.getStoryContent());
+        storyDTO.setAuthorName(story.getAuthorName());
+        storyDTO.setStoryName(story.getStoryName());
+        storyDTO.setGenre(story.getGenre());
+        storyDTO.setAgeRestriction(story.getAgeRestriction());
+        storyDTO.setLikes(storyDTO.getLikes());
+
+
+        return storyDTO;
     }
 }

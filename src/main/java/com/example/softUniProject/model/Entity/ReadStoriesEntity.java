@@ -1,10 +1,9 @@
-package com.example.softUniProject.Model.Entity;
+package com.example.softUniProject.model.Entity;
 
 import jakarta.persistence.Entity;
 
-
 @Entity
-public class WrittenStoriesEntity extends BaseEntity{
+public class ReadStoriesEntity extends BaseEntity{
 
     private String name;
     private String author;

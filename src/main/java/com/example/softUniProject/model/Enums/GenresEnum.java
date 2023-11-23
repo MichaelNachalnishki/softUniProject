@@ -1,4 +1,4 @@
-package com.example.softUniProject.Model.Enums;
+package com.example.softUniProject.model.Enums;
 
 public enum GenresEnum {
 
