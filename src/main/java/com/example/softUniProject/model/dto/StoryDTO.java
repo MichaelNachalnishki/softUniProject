@@ -80,7 +80,7 @@ public class StoryDTO {
         storyDTO.setStoryContent(story.getStoryContent());
         storyDTO.setAuthorName(story.getAuthorName());
         storyDTO.setStoryName(story.getStoryName());
-        storyDTO.setGenre(story.getGenre());
+        storyDTO.setGenre(story.getGenre().getName());
         storyDTO.setAgeRestriction(story.getAgeRestriction());
         storyDTO.setLikes(storyDTO.getLikes());
 

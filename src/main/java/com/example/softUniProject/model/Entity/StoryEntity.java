@@ -15,8 +15,8 @@ public class StoryEntity extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private AgeRestrictionEnum ageRestriction;
 
-    @Enumerated(EnumType.STRING)
-    private GenresEnum genre;
+    @ManyToOne
+    private GenreEntity genre;
 
     public int getLikes() {
         return likes;
@@ -59,11 +59,11 @@ public class StoryEntity extends BaseEntity{
     }
 
 
-    public GenresEnum getGenre() {
+    public GenreEntity getGenre() {
         return genre;
     }
 
-    public void setGenre(GenresEnum genre) {
+    public void setGenre(GenreEntity genre) {
         this.genre = genre;
     }
 }

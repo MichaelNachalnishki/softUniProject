@@ -1,61 +1,59 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>Sample</head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Story</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
 <body>
-<main>
-    <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Create Story</span></h1>
-    <hr class="hr-3 w-25 bg-white"/>
 
-    <form class="mx-auto w-25 bg-blur rounded" th:method="POST" th:action="@{/story/create}"
-          th:object="${storyAddBindingModel}">
+<h2>Create a Story</h2>
 
-        <div class="form-group">
-            <div class="label-holder text-white textCol d-flex justify-content-center">
-                <label  class="h4 mb-2">Name</label>
-                <textarea type="text" errorclass="bg-danger"> </textarea>
-            </div>
-        </div>
+<form action="submit_story.php" method="post">
+    <label for="storyName">Story Name:</label>
+    <input type="text" id="storyName" name="storyName" required>
 
-        <div class="form-group">
-            <div class="label-holder text-white textCol d-flex justify-content-center">
-                <label  class="h4 mb-2">Content</label>
-            </div>
-            <textarea type="text" errorclass="bg-danger"> </textarea>
-            <small></small>
-        </div>
+    <label for="genre">Genre:</label>
+    <select id="genre" name="genre" required>
+        <option value="fantasy">Fantasy</option>
+        <option value="science_fiction">Science Fiction</option>
+        <option value="mystery">Mystery</option>
+        <option value="romance">Romance</option>
+        <!-- Add more genres as needed -->
+    </select>
 
-        <div class="form-group">
-            <div class="text-white label-holder d-flex justify-content-center">
-                <label for="priority" class="h4 mb-2">Age testriction</label>
-            </div>
-            <select class="browser-default custom-select" id="priority"  th:errorclass="bg-danger">
-                <option value="">Select age restricton</option>
-                <option value="KIDS">Kids</option>
-                <option value="ADULTS">Adults</option>
-                <option value="TEEN">Teen</option>
-                <option value="EVERYONE">Everyone</option>
-            </select>
+    <label for="storyContent">Story Content:</label>
+    <textarea id="storyContent" name="storyContent" rows="8" required></textarea>
 
-        </div>
-
-        <div class="form-group">
-            <label class="text-white font-weight-bold" for="imageUrl">Image URL</label>
-            <input id="imageUrl"
-                   name="imageUrl"
-                   type="url" class="form-control"
-                   placeholder="Put vehicle image URL here">
-        </div>
-
-
-        <div class="button-holder d-flex justify-content-center">
-            <button type="submit" class="btn btn-warning  mb-3" value="Register" >Add story</button>
-        </div>
-
-    </form>
-</main>
-
-<footer></footer>
+    <button type="submit">Create Story</button>
+</form>
 
 </body>
 </html>
