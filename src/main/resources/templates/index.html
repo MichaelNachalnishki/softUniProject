@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-<head th:replace="commons::head">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"
+          >
     <title>Your Writing Website</title>
 </head>
 <body>
 
-    <header th:replace="commons::nav">
+    <header>
         <h1>Your Writing Website</h1>
         <p>Welcome to Write your story!</p>
     </header>
@@ -21,7 +24,7 @@
     </section>
     <div>
         <h3>
-            <a class="text-primary" th:href="@{/login}">Login</a>
+            <a class="text-primary"  th:href="@{/login}" >Login</a>
             if you have an account or
             <a class="text-primary" th:href="@{/register}">Register</a>
             now and read stories form independent authors.

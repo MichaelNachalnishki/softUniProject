@@ -1,58 +1,180 @@
 package com.example.softUniProject.controller;
 
-import com.example.softUniProject.model.dto.StoryAddBindingModel;
+import com.example.softUniProject.model.Entity.GenreEntity;
+import com.example.softUniProject.model.Enums.GenresEnum;
+import com.example.softUniProject.model.dto.WriteStoryDto;
+import com.example.softUniProject.repo.StoryRepository;
+import com.example.softUniProject.service.GenreService;
 import com.example.softUniProject.service.StoryService;
-import com.example.softUniProject.service.impl.LoggedUser;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+
 public class StoryController {
-
-    private final LoggedUser loggedUser;
     private final StoryService storyService;
+    private final StoryRepository storyRepository;
+    private final GenreService genreService;
 
-    public StoryController(LoggedUser loggedUser, StoryService storyService) {
-        this.loggedUser = loggedUser;
+
+
+    public StoryController(StoryService storyService, StoryRepository storyRepository, GenreService genreService) {
+
+
         this.storyService = storyService;
+        this.storyRepository = storyRepository;
+
+        this.genreService = genreService;
     }
 
-    @GetMapping("/story/write")
-    public ModelAndView add() {
-        return new ModelAndView("createAStory");
+    @ModelAttribute
+    public GenresEnum[] genres() {
+        return GenresEnum.values();
     }
 
+    @GetMapping("/chooseWhatToDo")
+    public String chooseWhatToDo() {
+        return "chooseWhatToDo";
+    }
 
-    @PostMapping("/story/write")
-    public ModelAndView add(@ModelAttribute("storyAddBindingModel") @Valid StoryAddBindingModel storyAddBindingModel, BindingResult bindingResult) {
+    @PostMapping("/chooseWhatToDo")
+    public String chooseWhatToDo(Model model) {
+        return "redirect:/chooseWhatToDo";
+    }
 
-        if (!loggedUser.isLogged()) {
-            return new ModelAndView("redirect:/");
+    @GetMapping("/createAStory")
+    public String add(Model model) {
+        if (!model.containsAttribute("writeStoryDto")) {
+            model.addAttribute("writeStoryDto", WriteStoryDto.empty());
         }
 
-        if (bindingResult.hasErrors()) {
-            return new ModelAndView("createAStory");
-        }
-
-        storyService.add(storyAddBindingModel);
+        model.addAttribute("genres", genreService.getAllGenres());
 
 
-        return new ModelAndView("redirect:/home");
+
+
+
+        return "createAStory";
+    }
+
+    @PostMapping("/createAStory")
+    public String add(WriteStoryDto writeStoryDto) {
+
+//        if (bindingResult.hasErrors()) {
+//            rAtt.addFlashAttribute("writeStoryDto", writeStoryDto);
+//            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.writeStoryDto", bindingResult);
+//            return "redirect:/createAStory";
+//        }
+
+
+        //UUID newStoryUUID = storyService.add(writeStoryDto, author);
+        storyService.addStory(writeStoryDto);
+
+
+        return "redirect:/chooseWhatToDo";
     }
 
     @GetMapping("/story/read")
-    public ModelAndView read(@ModelAttribute("storyAddBindingModel") @Valid StoryAddBindingModel storyAddBindingModel, BindingResult bindingResult) {
-        return new ModelAndView("chooseWhichStoryToRead");
+    public String read(@ModelAttribute("storyAddBindingModel") @Valid WriteStoryDto storyAddBindingModel) {
+        return ("chooseWhichGenreToRead");
     }
 
 
     @PostMapping("/story/read")
-    public ModelAndView read(){
-        return  new ModelAndView("redirect:/chooseWhichStoryToRead");
+    public String read(){
+        return ("redirect:/chooseWhichGenreToRead");
     }
+
+    @GetMapping("/genre/fantasy")
+    public String readFantasy(Model model) {
+
+        model.addAttribute("fantasy", storyRepository.findAllByGenre(GenresEnum.FANTASY));
+        return ("fantasy");
+    }
+
+    @PostMapping("/genre/fantasy")
+    public String readFantasy(){
+
+
+        storyRepository.findAllByGenre(GenresEnum.FANTASY);
+
+        return ("redirect:/fantasy");
+    }
+
+
+
+    @GetMapping("/genre/poetry")
+    public String readPoetry(Model model) {
+        model.addAttribute("poetry", storyRepository.findAllByGenre(GenresEnum.POETRY));
+
+        return ("poetry");
+    }
+    @PostMapping("/genre/poetry")
+    public String readPoetry(){
+
+
+        storyRepository.findAllByGenre(GenresEnum.POETRY);
+
+        return ("redirect:/poetry");
+    }
+//
+//
+@GetMapping("/genre/crime")
+    public String readCrime(Model model) {
+        model.addAttribute("crime", storyRepository.findAllByGenre(GenresEnum.CRIME));
+        return ("crime");
+    }
+    @PostMapping("/genre/crime")
+    public String readCrime(){
+
+
+        storyRepository.findAllByGenre(GenresEnum.CRIME);
+
+        return  ("redirect:/crime");
+    }
+
+@GetMapping("/genre/horror")
+    public String readHorror(Model model) {
+        model.addAttribute("horror", storyRepository.findAllByGenre(GenresEnum.HORROR));
+        return ("horror");
+    }
+    @PostMapping("/genre/horror")
+    public String readHorror(){
+
+
+
+        storyRepository.findAllByGenre(GenresEnum.HORROR);
+
+        return ("redirect:/horror");
+    }
+
+    @GetMapping("/genre/scifi")
+    public String readSciFi(Model model) {
+
+        model.addAttribute("scifi", storyRepository.findAllByGenre(GenresEnum.SCIENCE_FICTION));
+        return ("scifi");
+    }
+    @PostMapping("/genre/scifi")
+    public String readSciFi(){
+
+
+
+        storyRepository.findAllByGenre(GenresEnum.SCIENCE_FICTION);
+
+        return ("redirect:/scifi");
+    }
+
+//
+//    @PostMapping("/story/remove/{id}")
+//    public ModelAndView remove(@PathVariable("id") Long id){
+//        if(!loggedUser.isLogged()){
+//            return new ModelAndView("redirect:/");
+//        }
+//        storyService.remove(id);
+//
+//        return new ModelAndView("redirect:/home");
+//    }
 }

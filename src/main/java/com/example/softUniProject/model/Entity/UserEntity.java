@@ -1,9 +1,6 @@
 package com.example.softUniProject.model.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,57 +13,78 @@ public class UserEntity extends BaseEntity{
     private String password;
     private String username;
     @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<RolesEntity> roles = new ArrayList<>();
     @ManyToMany
     private List<WrittenStoriesEntity> writtenStories;
-    @ManyToMany
-    private List<ReadStoriesEntity> readStories;
+
+    private boolean isActive;
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public UserEntity setActive(boolean active) {
+        isActive = active;
+        return this;
+    }
+//    @ManyToMany
+//    private List<ReadStoriesEntity> readStories;
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public UserEntity setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public UserEntity setPassword(String password) {
         this.password = password;
+        return this;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public UserEntity setUsername(String username) {
         this.username = username;
+        return this;
     }
 
     public List<RolesEntity> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<RolesEntity> roles) {
+    public UserEntity setRoles(List<RolesEntity> roles) {
         this.roles = roles;
+        return this;
     }
 
     public List<WrittenStoriesEntity> getWrittenStories() {
         return writtenStories;
     }
 
-    public void setWrittenStories(List<WrittenStoriesEntity> writtenStories) {
+    public UserEntity setWrittenStories(List<WrittenStoriesEntity> writtenStories) {
         this.writtenStories = writtenStories;
+        return this;
     }
 
-    public List<ReadStoriesEntity> getReadStories() {
-        return readStories;
-    }
-
-    public void setReadStories(List<ReadStoriesEntity> readStories) {
-        this.readStories = readStories;
-    }
+//    public List<ReadStoriesEntity> getReadStories() {
+//        return readStories;
+//    }
+//
+//    public UserEntity setReadStories(List<ReadStoriesEntity> readStories) {
+//        this.readStories = readStories;
+//        return this;
+//    }
 }

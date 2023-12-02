@@ -15,3 +15,9 @@ spring:
   sql:
     init:
       mode: never
+
+# Path: src/main/resources/application-dev.yaml
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE

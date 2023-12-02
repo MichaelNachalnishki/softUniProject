@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head ang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickable Pictures</title>
+    <style>
+        :root {
+            --timing: 400ms;
+            --rotation: 20deg;
+        }
+
+        html {
+            color-scheme: dark;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            perspective: 1000px;
+            margin: 0;
+        }
+
+        .yoda-container {
+            display: flex;
+            margin-right: 10px;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .character {
+            width: 300px;
+            aspect-ratio: 9 / 16;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: rotate var(--timing) ease;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .character:hover {
+            rotate: x var(--rotation);
+            cursor: pointer;
+        }
+
+        .character::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 100;
+            background-image: radial-gradient(circle, transparent 150px, black);
+            opacity: 0;
+            transition: opacity var(--timing);
+        }
+
+        .character:hover::before {
+            opacity: 1;
+        }
+
+        .character::after {
+            content: "";
+            position: absolute;
+            inset: 80% 0.5rem 0.5rem;
+            translate: 0;
+            transform: translateZ(-100px);
+            background: black;
+            filter: blur(1rem);
+            z-index: 1;
+            transition: rotate var(--timing), translate var(--timing);
+        }
+
+        .character:hover::after {
+            rotate: x calc(var(--rotation) * -1);
+            translate: 0 60px;
+        }
+
+        .bg-image {
+            position: absolute;
+            z-index: 10;
+            height: 100%;
+            object-fit: cover;
+            object-position: -150px center;
+        }
+
+        .logo,
+        .front-image {
+            position: absolute;
+        }
+
+        .logo {
+            z-index: 1000;
+            filter: invert(1);
+            width: 65%;
+            margin-inline: auto;
+            inset: auto 0 2rem;
+            transform: translateY(0rem) translateZ(20px);
+            transition: var(--timing);
+        }
+
+        .character:hover .logo {
+            transform: translateY(-2rem) translateZ(20px);
+            rotate: x calc(var(--rotation) * -1);
+        }
+
+        .front-image {
+            scale: 1.125;
+            transform-origin: bottom;
+            opacity: 0;
+            z-index: 100;
+            transition: var(--timing);
+        }
+
+        .character:hover .front-image {
+            opacity: 1;
+            transform: translateY(-2rem) translateZ(-10px);
+            rotate: x calc(var(--rotation) * -1);
+        }
+
+
+    </style>
+</head>
+<header></header>
+<body>
+
+<div class="yoda-container">
+    <a class="character" th:href="@{/genre/crime}">
+        <img class="logo"  src="https://cdn.discordapp.com/attachments/548952980389494794/1178728466833743912/cooltext448036455867368.png?ex=6577336e&is=6564be6e&hm=dc8e71bf91a1bc463d3b57a9346ad4e6a416701ea73f03ff6c8811967d6f8942&"  alt="" />
+        <img class="front-image" src="https://media.moddb.com/images/articles/1/166/165768/auto/1408393981payday_render_by_rajivmessi-d7c1yoa.png" alt="yoda holding his lightsabre up, the glow highlighting an angry look on his face" />
+        <img class="bg-image-crime" src="https://i.ebayimg.com/00/s/MTA4MFg3MjA=/z/q50AAOSwt8JjBjHc/$_12.JPG?set_id=880000500F" alt="yoda looking peaceful on dagobah" />
+    </a>
+</div>
+
+<div class="yoda-container">
+    <a class="character" th:href="@{/genre/fantasy}">
+        <img class="logo"  src="https://ct.mob0.com/Previews/45.png"  alt="" />
+        <img class="front-image" src="https://static.miraheze.org/greatcharacterswiki/a/a2/Harry-Potter-PNG-Background.png" alt="yoda holding his lightsabre up, the glow highlighting an angry look on his face" />
+        <img class="bg-image-fantasy" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/40eb3ade-91e8-48e4-9923-dc622562072f/dfv2tae-3c30206f-b80d-42ff-8f4b-4d79085b8525.png/v1/fill/w_1280,h_1920,q_80,strp/lord_of_the_rings_1_fellowship_of_the_ring__2001___by_kahlanamnelle_dfv2tae-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTkyMCIsInBhdGgiOiJcL2ZcLzQwZWIzYWRlLTkxZTgtNDhlNC05OTIzLWRjNjIyNTYyMDcyZlwvZGZ2MnRhZS0zYzMwMjA2Zi1iODBkLTQyZmYtOGY0Yi00ZDc5MDg1Yjg1MjUucG5nIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.uprqLA9e_x9q03fwU92ixlXuJlGB83shkLQGWm3Pfy0" alt="yoda looking peaceful on dagobah" />
+    </a>
+</div>
+
+<div class="yoda-container">
+    <a class="character" th:href="@{/genre/horror}">
+        <img class="logo"  src="https://cdn.discordapp.com/attachments/548952980389494794/1178733217382142042/cooltext448037556216414.png?ex=657737da&is=6564c2da&hm=ea864782acfb8ba86214146538e565933f6b75f8e80fdab5dafe7b4891f209ef&"  alt="" />
+        <img class="front-image" src="https://static.tvtropes.org/pmwiki/pub/images/ghostface_dbd.png" alt="yoda holding his lightsabre up, the glow highlighting an angry look on his face" />
+        <img class="bg-image-horror" src="https://i.ebayimg.com/images/g/2EQAAOSwKzFkaW-l/s-l1200.jpg " alt="yoda looking peaceful on dagobah" />
+    </a>
+</div>
+
+<div class="yoda-container" >
+    <a class="character" th:href="@{/genre/poetry}">
+        <img class="logo"  src="https://cdn.discordapp.com/attachments/548952980389494794/1178733606303174747/cooltext448037641573583.png?ex=65773837&is=6564c337&hm=07aff179149f18b49c02d790f1e0e356a03581137606fa7a0fc5201e352a6cd0&"  alt="" />
+        <img class="front-image" src="https://i.pinimg.com/originals/61/eb/52/61eb52b1698921d44303aee103d151ac.png" alt="yoda holding his lightsabre up, the glow highlighting an angry look on his face" />
+        <img class="bg-image-poetry" src="https://media.newyorker.com/photos/5eb340bbfb47a95f08dba145/master/pass/Greenblatt-Shakespeare.jpg" alt="yoda looking peaceful on dagobah" />
+    </a>
+</div>
+
+<div class="yoda-container">
+    <a class="character" th:href="@{/genre/scifi}">
+        <img class="logo" src="https://cdn.discordapp.com/attachments/712955922023972865/1178724739154452571/cooltext448035276151641.png?ex=65772ff5&is=6564baf5&hm=0da30b3619dde3cc300776cf643141efab6e7b2ebd76bc6e2704ab7c2a8f0b76&"/>
+        <img class="front-image" src="https://assets.codepen.io/308367/yoda-front.png" alt="yoda holding his lightsabre up, the glow highlighting an angry look on his face" />
+        <img class="bg-image-scifi" src="https://i.pinimg.com/originals/31/05/fd/3105fd923843918856570ca039d733a1.jpg" alt="yoda looking peaceful on dagobah" />
+    </a>
+</div>
+
+
+</body>
+</html>
+
+<!--found this css on youTube-->

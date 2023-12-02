@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,22 +36,30 @@
 <body>
 
 <h2>Create a Story</h2>
+<form th:method="post"
+      th:action="@{/createAStory}"
+      th:object="${writeStoryDto}">
 
-<form action="submit_story.php" method="post">
-    <label for="storyName">Story Name:</label>
-    <input type="text" id="storyName" name="storyName" required>
+    <label for="authorName">Author name:</label>
+    <textarea id="authorName" name="authorName" rows="1" required th:field="*{authorName}"></textarea>
+
+<label for="storyName" th:field="*{storyName}">Story Name:</label>
+<input type="text" id="storyName" name="storyName">
+
 
     <label for="genre">Genre:</label>
-    <select id="genre" name="genre" required>
-        <option value="fantasy">Fantasy</option>
-        <option value="science_fiction">Science Fiction</option>
-        <option value="mystery">Mystery</option>
-        <option value="romance">Romance</option>
-        <!-- Add more genres as needed -->
+    <select id="genre" name="genre" th:field="*{genre}" required>
+        <option th:each="genre: ${genres}"
+                th:text="${genre.name()}"
+                th:value="${genre.name()}"
+        ></option>
     </select>
+    <!-- Add more genres as needed -->
+
+
 
     <label for="storyContent">Story Content:</label>
-    <textarea id="storyContent" name="storyContent" rows="8" required></textarea>
+    <textarea id="storyContent" name="storyContent" rows="8" required th:field="*{content}"></textarea>
 
     <button type="submit">Create Story</button>
 </form>
