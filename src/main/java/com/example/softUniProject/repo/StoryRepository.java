@@ -15,6 +15,8 @@ public interface StoryRepository extends JpaRepository<StoryEntity, Long> {
     List<StoryEntity> findAllByGenre(GenresEnum genre);
 
 
+    void deleteById(long id);
+
     @Query("SELECT b FROM StoryEntity b")
     List<StoryEntity> getAllStories();
 

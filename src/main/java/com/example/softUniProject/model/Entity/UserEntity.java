@@ -13,14 +13,10 @@ public class UserEntity extends BaseEntity{
     private String password;
     private String username;
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<RolesEntity> roles = new ArrayList<>();
     @ManyToMany
     private List<WrittenStoriesEntity> writtenStories;
-
+@Column(name = "is_active")
     private boolean isActive;
 
     public boolean isActive() {
@@ -28,7 +24,7 @@ public class UserEntity extends BaseEntity{
     }
 
     public UserEntity setActive(boolean active) {
-        isActive = active;
+        this.isActive= active;
         return this;
     }
 //    @ManyToMany

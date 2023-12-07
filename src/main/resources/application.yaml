@@ -15,9 +15,29 @@ spring:
   sql:
     init:
       mode: never
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+keyys:
+  remember-me:
+    key: ${REMEMBER_ME_KEY:default-remember-me-key}
 
 # Path: src/main/resources/application-dev.yaml
 logging:
   level:
     org.hibernate.SQL: DEBUG
     org.hibernate.orm.jdbc.bind: TRACE
+
+server:
+  error:
+    include-message: always
+    include-stacktrace: always
+
+mail:
+    storyapp: storyapp@example.com
+    host: localhost
+    port: 1025
+    username: ${MAIL_USER:username}
+    password: ${MAIL_PASSWORD:password}

@@ -58,18 +58,6 @@ public class StoryServiceImpl implements StoryService {
     @Override
     public void addStory(WriteStoryDto writeStoryDto) {
 
-//        StoryEntity newStory = map(writeStoryDto);
-//        GenreEntity genreEntity = genreRepository.findByName(writeStoryDto.genre()).orElseThrow(() ->
-//                new IllegalArgumentException("" + writeStoryDto.genre() + " not found!"));
-//
-//        UserEntity authorEntity = userRepository.findByEmail(author.getUsername()).orElseThrow(() ->
-//                new IllegalArgumentException("User with email " + author.getUsername() + " not found!"));
-//
-//
-//        newStory.setGenre(genreEntity.getName());
-//        newStory.setAuthorName(authorEntity.getUsername());
-//
-//        newStory = storyRepository.save(newStory);
 
         StoryEntity newStory = map(writeStoryDto);
 

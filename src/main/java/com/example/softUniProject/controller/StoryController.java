@@ -1,6 +1,7 @@
 package com.example.softUniProject.controller;
 
 import com.example.softUniProject.model.Entity.GenreEntity;
+import com.example.softUniProject.model.Entity.StoryEntity;
 import com.example.softUniProject.model.Enums.GenresEnum;
 import com.example.softUniProject.model.dto.WriteStoryDto;
 import com.example.softUniProject.repo.StoryRepository;
@@ -11,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 
@@ -22,11 +26,8 @@ public class StoryController {
 
 
     public StoryController(StoryService storyService, StoryRepository storyRepository, GenreService genreService) {
-
-
         this.storyService = storyService;
         this.storyRepository = storyRepository;
-
         this.genreService = genreService;
     }
 
@@ -53,24 +54,19 @@ public class StoryController {
 
         model.addAttribute("genres", genreService.getAllGenres());
 
-
-
-
-
         return "createAStory";
     }
 
     @PostMapping("/createAStory")
-    public String add(WriteStoryDto writeStoryDto) {
+    public String add(WriteStoryDto writeStoryDto, BindingResult bindingResult,
+                      RedirectAttributes rAtt) {
 
-//        if (bindingResult.hasErrors()) {
-//            rAtt.addFlashAttribute("writeStoryDto", writeStoryDto);
-//            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.writeStoryDto", bindingResult);
-//            return "redirect:/createAStory";
-//        }
+        if (bindingResult.hasErrors()) {
+            rAtt.addFlashAttribute("writeStoryDto", writeStoryDto);
+            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.writeStoryDto", bindingResult);
+            return "redirect:/createAStory";
+        }
 
-
-        //UUID newStoryUUID = storyService.add(writeStoryDto, author);
         storyService.addStory(writeStoryDto);
 
 
@@ -145,15 +141,14 @@ public class StoryController {
     public String readHorror(){
 
 
+      storyRepository.findAllByGenre(GenresEnum.HORROR);
 
-        storyRepository.findAllByGenre(GenresEnum.HORROR);
 
         return ("redirect:/horror");
     }
 
     @GetMapping("/genre/scifi")
     public String readSciFi(Model model) {
-
         model.addAttribute("scifi", storyRepository.findAllByGenre(GenresEnum.SCIENCE_FICTION));
         return ("scifi");
     }
@@ -161,20 +156,19 @@ public class StoryController {
     public String readSciFi(){
 
 
-
         storyRepository.findAllByGenre(GenresEnum.SCIENCE_FICTION);
+
 
         return ("redirect:/scifi");
     }
 
-//
-//    @PostMapping("/story/remove/{id}")
-//    public ModelAndView remove(@PathVariable("id") Long id){
-//        if(!loggedUser.isLogged()){
-//            return new ModelAndView("redirect:/");
-//        }
-//        storyService.remove(id);
-//
-//        return new ModelAndView("redirect:/home");
-//    }
+
+    @PostMapping("/story/{id}")
+    public String remove(@PathVariable("id") Long id){
+        storyService.remove(id);
+        return "redirect:/chooseWhatToDo";
+    }
+
+
+
 }

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head>
+<head th:replace="navbar">
 </head>
 
 <body>
@@ -28,7 +28,9 @@
                     </div>
                 </li>
             </ul>
-
+            <form th:action="@{/story/{id}(id=${story.getId()})}" method="post">
+                <button sec:authorize="hasRole('ADMIN')" type="submit">Delete</button>
+            </form>
         </div>
     </div>
 </div>

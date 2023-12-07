@@ -1,14 +1,18 @@
 package com.example.softUniProject.model.Entity;
 
 import com.example.softUniProject.model.Enums.RolesEnum;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "user_role")
-public class RolesEntity extends BaseEntity{
+public class RolesEntity{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Enumerated(EnumType.STRING)
+    private RolesEnum role;
+
     public RolesEnum getRole() {
         return role;
     }
@@ -18,6 +22,13 @@ public class RolesEntity extends BaseEntity{
         return this;
     }
 
-    @Enumerated(EnumType.STRING)
-    private RolesEnum role;
+
+    public Long getId() {
+        return id;
+    }
+
+    public RolesEntity setId(Long id) {
+        this.id = id;
+        return this;
+    }
 }

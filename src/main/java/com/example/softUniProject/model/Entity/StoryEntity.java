@@ -1,18 +1,14 @@
 package com.example.softUniProject.model.Entity;
 
-import com.example.softUniProject.model.Enums.AgeRestrictionEnum;
 import com.example.softUniProject.model.Enums.GenresEnum;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import org.hibernate.annotations.JdbcTypeCode;
-
-import java.sql.Types;
-import java.util.List;
-import java.util.UUID;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "story")
-public class StoryEntity extends BaseEntity{
+public class StoryEntity extends BaseEntity {
 
     private String authorName;
     private String storyName;
