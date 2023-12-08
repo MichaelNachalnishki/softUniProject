@@ -6,6 +6,7 @@ public interface UserService {
 
     void registerUser(UserRegisterDto userRegisterDto);
 
+    boolean containsEmail(String email);
 
 
 }

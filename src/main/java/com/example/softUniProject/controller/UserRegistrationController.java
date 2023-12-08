@@ -1,5 +1,6 @@
 package com.example.softUniProject.controller;
 
+import com.example.softUniProject.exceptions.EmailAlreadyExistsError;
 import com.example.softUniProject.model.Entity.UserActivationLinkEntity;
 import com.example.softUniProject.model.dto.UserRegisterDto;
 import com.example.softUniProject.service.UserActivationService;
@@ -30,9 +31,15 @@ public class UserRegistrationController {
     @PostMapping("/register")
     public String register(UserRegisterDto userRegisterDto){
 
-     userService.registerUser(userRegisterDto);
+        if(userService.containsEmail(userRegisterDto.getEmail())){
+            return "redirect:/register";
 
-        return ("redirect:/");
+        }else{
+            userService.registerUser(userRegisterDto);
+            return ("redirect:/");
+        }
+
+
     }
 
 

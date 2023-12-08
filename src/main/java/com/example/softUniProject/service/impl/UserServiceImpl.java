@@ -35,6 +35,10 @@ public class UserServiceImpl implements UserService {
     applicationEventPublisher.publishEvent(new UserRegistrationEvent("UserService", userRegisterDto.getEmail(), userRegisterDto.getUsername()));
     }
 
+    @Override
+    public boolean containsEmail(String email) {
+        return userRepository.findByEmail(email).isPresent();
+    }
 
 
     private UserEntity map(UserRegisterDto userRegisterDto) {
