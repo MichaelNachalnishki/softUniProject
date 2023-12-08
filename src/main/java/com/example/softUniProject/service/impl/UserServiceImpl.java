@@ -1,13 +1,18 @@
 package com.example.softUniProject.service.impl;
 
 import com.example.softUniProject.events.UserRegistrationEvent;
+import com.example.softUniProject.model.Entity.RolesEntity;
 import com.example.softUniProject.model.Entity.UserEntity;
+import com.example.softUniProject.model.Enums.RolesEnum;
 import com.example.softUniProject.model.dto.UserRegisterDto;
 import com.example.softUniProject.repo.UserRepository;
 import com.example.softUniProject.service.UserService;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -29,6 +34,8 @@ public class UserServiceImpl implements UserService {
 
     applicationEventPublisher.publishEvent(new UserRegistrationEvent("UserService", userRegisterDto.getEmail(), userRegisterDto.getUsername()));
     }
+
+
 
     private UserEntity map(UserRegisterDto userRegisterDto) {
         return new UserEntity().setActive(false)

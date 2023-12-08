@@ -17,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
-
 public class StoryController {
     private final StoryService storyService;
     private final StoryRepository storyRepository;
@@ -116,8 +115,7 @@ public class StoryController {
 
         return ("redirect:/poetry");
     }
-//
-//
+
 @GetMapping("/genre/crime")
     public String readCrime(Model model) {
         model.addAttribute("crime", storyRepository.findAllByGenre(GenresEnum.CRIME));

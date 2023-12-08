@@ -1,63 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head >
+>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Writing Website</title>
 
-    <script type="text/javascript">
 
-        $(document).ready(function(){
 
-            $(".dropdown-item").click(function(e){
-
-            });
-        });
+    <div id="google_translate_element"></div>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script> function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
     </script>
 
 </head>
 <body>
 
-<div class="col-sm">
-    <div class="btn-group dropright translate">
-        <button id="langSel" type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Translate to
-        </button>
-        <div class="dropdown-menu translate-option">
-            <a class="dropdown-item" href="#" tolang="en">English (default)</a>
-            <a class="dropdown-item" href="#" tolang="it">Italian</a>
-            <a class="dropdown-item" href="#" tolang="es">Spanish</a>
-            <a class="dropdown-item" href="#" tolang="de">German</a>
-        </div>
-    </div>
+
+<header>
+    <h1>Your Writing Website</h1>
+    <p>Welcome to Write your story!</p>
+</header>
+
+<section>
+    <h2>About Us</h2>
+    <p>Our mission is ... </p>
+
+    <h2>Featured Articles</h2>
+    <p>Highlight some of your best or latest articles. Provide a glimpse into the diverse topics your writers cover.</p>
+</section>
+<div>
+    <h3>
+        <a class="text-primary" th:href="@{/login}">Login</a>
+        if you have an account or
+        <a class="text-primary" th:href="@{/register}">Register</a>
+        now and read stories form independent authors.
+    </h3>
 </div>
 
-    <header>
-        <h1>Your Writing Website</h1>
-        <p>Welcome to Write your story!</p>
-    </header>
-
-    <section>
-        <h2>About Us</h2>
-        <p>Our mission is ... </p>
-
-        <h2>Featured Articles</h2>
-        <p>Highlight some of your best or latest articles. Provide a glimpse into the diverse topics your writers cover.</p>
-    </section>
-    <div>
-        <h3>
-            <a class="text-primary"  th:href="@{/login}" >Login</a>
-            if you have an account or
-            <a class="text-primary" th:href="@{/register}">Register</a>
-            now and read stories form independent authors.
-        </h3>
-    </div>
-
-    <footer>
-        <p>&copy; 2023 Your Writing Website. All rights reserved.</p>
-    </footer>
+<footer>
+    <p>&copy; 2023 Your Writing Website. All rights reserved.</p>
+</footer>
 
 </body>
 </html>

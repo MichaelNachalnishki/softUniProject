@@ -1,0 +1,34 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    defer-datasource-initialization: true
+  sql:
+    init:
+       mode: never
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+keyys:
+  remember-me:
+    key: default-remember-me-key
+
+# Path: src/main/resources/application-dev.yaml
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+
+server:
+  error:
+    include-message: always
+    include-stacktrace: always
+
+mail:
+  storyapp: storyapp@example.com
+  host: localhost
+  port: 3333
+  username: username
+  password: password

@@ -35,23 +35,7 @@ public class StoryServiceImpl implements StoryService {
     }
 
 
-//    @Override
-//    public List<StoryDTO> getAllStories() {
-//        return storyRepository.getAllStories().stream()
-//                .map(story -> new StoryDTO(
-//                        story.getStoryName(),
-//                        story.getAuthorName(),
-//                        story.getStoryContent(),
-//                        story.getLikes(),
-//                        story.getAgeRestriction(),
-//                        story.getGenre().stream()
-//                                .map(genre -> new GenreDTO(genre.getId(), genre.getName().toString()))
-//                                .sorted(Comparator.comparing(GenreDTO::name))
-//                                .collect(Collectors.toList())
-//                ))
-//                .sorted(Comparator.comparing(StoryDTO::storyName))
-//                .collect(Collectors.toList());
-//    }
+
 
 
 

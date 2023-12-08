@@ -31,7 +31,7 @@ public class UserActivationServiceImpl implements UserActivationService {
     @EventListener(UserRegistrationEvent.class)
     @Override
     public void userRegistered(UserRegistrationEvent event) {
-       // System.out.println("User with email " + event.getEmail() + " registered successfully!");
+
         String activationLink = createActivationLink(event.getEmail());
         emailService.sentRegisterEmail(event.getEmail(), event.getUsernames(), activationLink);
     }

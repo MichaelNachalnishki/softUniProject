@@ -13,15 +13,15 @@ public class OldStoriesCleanUpScheduler {
         this.storyRepository = storyRepository;
     }
 
-    @Scheduled(cron = "0 * * * * ?")
-    public void cleanUp(){
-        if(storyRepository.count() == 0){
-            System.out.println("No stories to clean up");
-            return;
-        }
-
-         storyRepository.deleteAll();
-        System.out.println("Cleaning up all stories");
-
-    }
+//    @Scheduled(cron = "0 * * * * ?")
+//    public void cleanUp(){
+//        if(storyRepository.count() == 0){
+//            System.out.println("No stories to clean up");
+//            return;
+//        }
+//
+//         storyRepository.deleteAll();
+//        System.out.println("Cleaning up all stories");
+//
+//    }
 }

@@ -51,6 +51,22 @@ public class MyUserDetailsTest {
         Assertions.assertNotNull(userDetails);
         Assertions.assertEquals(testUser.getEmail(), userDetails.getUsername());
 
+        Assertions.assertEquals(testUser.getPassword(), userDetails.getPassword());
+
+        Assertions.assertEquals(2, userDetails.getAuthorities().size());
+
+        Assertions.assertTrue(containsAuth(userDetails, "ROLE_" + RolesEnum.ADMIN.name()));
+        Assertions.assertTrue(containsAuth(userDetails, "ROLE_" + RolesEnum.USER.name()));
+
+
+
+    }
+
+    private boolean containsAuth(UserDetails userDetails, String expectedAuth) {
+        return userDetails.getAuthorities().stream()
+                .anyMatch(auth -> expectedAuth.equals(auth.getAuthority()));
+
+
     }
 
     private static UserEntity createTestUser() {
@@ -59,7 +75,9 @@ public class MyUserDetailsTest {
                 .setEmail("email@example.com")
                 .setActive(true)
                 .setPassword("password")
-                .setRoles(List.of(new RolesEntity().setRole(RolesEnum.ADMIN)))
-                .setRoles(List.of(new RolesEntity().setRole(RolesEnum.USER)));
+                .setRoles(List.of(
+                        new RolesEntity().setRole(RolesEnum.ADMIN),
+                        new RolesEntity().setRole(RolesEnum.USER)
+                ));
     }
 }
