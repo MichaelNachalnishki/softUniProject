@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Split Screen with Clickable Pictures</title>
+    <title>Choose what to do</title>
     <style>
         body {
             margin: 0;
@@ -50,17 +51,19 @@
             opacity: 1;
         }
     </style>
+
+
 </head>
-<body>
+<body sec:authorize="isAuthenticated()">
 
 <div class="container">
     <a class="half" th:href="@{/story/read}">
-        <img src="path/to/image1.jpg" alt="Image 1">
-        <div class="overlay" >Click me</div>
+        <img src="https://www.powerstownet.com/wp-content/uploads/2020/04/1_81kOeUZXJ1AhCeZcpGk93g.jpeg.jpg" alt="Image 1">
+        <div class="overlay" >Read</div>
     </a>
     <a class="half" th:href="@{/createAStory}">
-        <img src="path/to/image2.jpg" alt="Image 2">
-        <div class="overlay" >Click me</div>
+        <img src="https://2456764.fs1.hubspotusercontent-na1.net/hub/2456764/hubfs/Campaign%20-%20Soft%20Skills/AdobeStock_82710879_800.jpg?width=680&name=AdobeStock_82710879_800.jpg" alt="Image 2">
+        <div class="overlay" >Write</div>
     </a>
 </div>
 

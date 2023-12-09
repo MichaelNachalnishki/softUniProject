@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
-<head ang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clickable Pictures</title>
@@ -125,7 +125,7 @@
     </style>
 </head>
 <header></header>
-<body>
+<body sec:authorize="isAuthenticated()">
 
 <div class="yoda-container">
     <a class="character" th:href="@{/genre/crime}">

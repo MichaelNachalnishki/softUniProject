@@ -1,6 +1,7 @@
 package com.example.softUniProject.model.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,11 +9,16 @@ import java.util.List;
 @Entity
 public class UserEntity extends BaseEntity{
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
+    @Email
     private String email;
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
     private String username;
     @ManyToMany(fetch = FetchType.EAGER)
+    @Column(nullable = false)
     private List<RolesEntity> roles = new ArrayList<>();
     @ManyToMany
     private List<WrittenStoriesEntity> writtenStories;
@@ -27,8 +33,7 @@ public class UserEntity extends BaseEntity{
         this.isActive= active;
         return this;
     }
-//    @ManyToMany
-//    private List<ReadStoriesEntity> readStories;
+
 
     public String getEmail() {
         return email;
@@ -75,12 +80,5 @@ public class UserEntity extends BaseEntity{
         return this;
     }
 
-//    public List<ReadStoriesEntity> getReadStories() {
-//        return readStories;
-//    }
-//
-//    public UserEntity setReadStories(List<ReadStoriesEntity> readStories) {
-//        this.readStories = readStories;
-//        return this;
-//    }
+
 }

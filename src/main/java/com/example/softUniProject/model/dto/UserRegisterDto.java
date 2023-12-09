@@ -1,8 +1,11 @@
 package com.example.softUniProject.model.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.util.Objects;
 
 public class UserRegisterDto {
+
     private  String username;
     private  String email;
     private  String password;

@@ -30,10 +30,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registerUser(UserRegisterDto userRegisterDto) {
-    userRepository.save(map(userRegisterDto));
-
-    applicationEventPublisher.publishEvent(new UserRegistrationEvent("UserService", userRegisterDto.getEmail(), userRegisterDto.getUsername()));
+        if(userRepository.findByEmail(userRegisterDto.getEmail()).isPresent()){
+            throw new IllegalArgumentException("Email already exists");
+        }else {
+            userRepository.save(map(userRegisterDto));
+            applicationEventPublisher.publishEvent(new UserRegistrationEvent("UserService", userRegisterDto.getEmail(), userRegisterDto.getUsername()));}
     }
+
+
+
 
     @Override
     public boolean containsEmail(String email) {
@@ -42,7 +47,7 @@ public class UserServiceImpl implements UserService {
 
 
     private UserEntity map(UserRegisterDto userRegisterDto) {
-        return new UserEntity().setActive(false)
+        return new UserEntity().setActive(true)
                 .setEmail(userRegisterDto.getEmail())
                 .setUsername(userRegisterDto.getUsername())
                 .setPassword(passwordEncoder.encode(userRegisterDto.getPassword()));

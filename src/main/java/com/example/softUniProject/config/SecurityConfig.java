@@ -32,6 +32,7 @@ public class SecurityConfig {
                 .requestMatchers("/", "/login", "/register", "/login-error", "chooseWhatToDo").permitAll()
                 .requestMatchers("/createAStory").permitAll()
                 .requestMatchers("/story/read").permitAll()
+                .requestMatchers("/images/**").permitAll()
                 .anyRequest().authenticated()
 
         ).formLogin(
@@ -51,8 +52,6 @@ public class SecurityConfig {
                     .rememberMeParameter("remember-me")
                     .rememberMeCookieName("remember-me-cookie");
         });
-
-        //TODO remember me
 
         return httpSecurity.build();
     }

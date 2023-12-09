@@ -1,49 +1,147 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
->
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Writing Website</title>
 
+    <!-- Include the CSS styles -->
+    <style>
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
 
+        header {
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 2px solid #fff;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 48px;
+            font-style: italic;
+            text-align: center; /* Center the name */
+        }
+
+        section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+
+        section h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        section p {
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #1a609d;
+        }
+
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        @media only screen and (max-width: 600px) {
+            section {
+                padding: 10px;
+            }
+
+            header h1 {
+                font-size: 36px;
+            }
+        }
+
+        @media only screen and (max-width: 400px) {
+            header {
+                flex-direction: column;
+                align-items: center; /* Center the items in mobile view */
+            }
+
+            header h1 {
+                font-size: 36px;
+                margin-bottom: 10px;
+            }
+
+            section {
+                max-width: 100%;
+            }
+        }
+
+        .login-register {
+            display: flex;
+            gap: 20px;
+            font-size: 18px;
+            align-items: center;
+        }
+
+        #google_translate_element {
+            order: -1;
+            margin-left: 10px; /* Add margin to the left corner */
+        }
+    </style>
 
     <div id="google_translate_element"></div>
     <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <script> function googleTranslateElementInit() {
-        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-    }
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
     </script>
 
 </head>
 <body>
 
-
 <header>
     <h1>Your Writing Website</h1>
-    <p>Welcome to Write your story!</p>
+    <div class="login-register">
+        <a class="text-primary" th:href="@{/login}">Login</a>
+        <span>or</span>
+        <a class="text-primary" th:href="@{/register}">Register</a>
+    </div>
 </header>
 
 <section>
     <h2>About Us</h2>
-    <p>Our mission is ... </p>
+    <p>The №1 place if you want to read stories from independent authors.  </p>
 
-    <h2>Featured Articles</h2>
-    <p>Highlight some of your best or latest articles. Provide a glimpse into the diverse topics your writers cover.</p>
+    <h2>In thw website</h2>
+    <p>We have very simple and intuitive UI to maximize the pleasure you get from reading.</p>
 </section>
-<div>
-    <h3>
-        <a class="text-primary" th:href="@{/login}">Login</a>
-        if you have an account or
-        <a class="text-primary" th:href="@{/register}">Register</a>
-        now and read stories form independent authors.
-    </h3>
-</div>
-
-<footer>
-    <p>&copy; 2023 Your Writing Website. All rights reserved.</p>
-</footer>
 
 </body>
 </html>

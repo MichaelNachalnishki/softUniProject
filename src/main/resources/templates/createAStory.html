@@ -1,67 +1,49 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="navbar">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create a Story</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-        input, select, textarea {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 16px;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
         button:hover {
             background-color: #45a049;
         }
     </style>
 </head>
-<body>
+<body style="font-family: Arial, sans-serif;
+            margin: 20px;">
 
 <h2>Create a Story</h2>
 <form th:method="post"
       th:action="@{/createAStory}"
-      th:object="${writeStoryDto}">
+      th:object="${writeStoryDto}"
+      sec:authorize="isAuthenticated()">
 
-    <label for="authorName">Author name:</label>
-    <textarea id="authorName" name="authorName" rows="1" required th:field="*{authorName}"></textarea>
+    <label for="authorName" style=" display: block;
+            margin-bottom: 8px;">Author name:</label>
+    <textarea id="authorName" name="authorName" rows="1" required th:field="*{authorName}" style="width: 100%;padding: 8px;margin-bottom: 16px;box-sizing: border-box;"></textarea>
 
-<label for="storyName" th:field="*{storyName}">Story Name:</label>
-<input type="text" id="storyName" name="storyName">
+<label for="storyName" th:field="*{storyName}" style="display: block;margin-bottom: 8px;">Story Name:</label>
+<input type="text" id="storyName" name="storyName" style="width: 100%;padding: 8px;margin-bottom: 16px;box-sizing: border-box;">
 
 
-    <label for="genre">Genre:</label>
-    <select id="genre" name="genre" th:field="*{genre}" required>
+    <label for="genre" style="display: block;margin-bottom: 8px;">Genre:</label>
+    <select id="genre" name="genre" th:field="*{genre}" required style="width: 100%;padding: 8px;margin-bottom: 16px;box-sizing: border-box;">
         <option th:each="genre: ${genres}"
                 th:text="${genre.name()}"
                 th:value="${genre.name()}"
         ></option>
     </select>
-    <!-- Add more genres as needed -->
+    <label for="storyContent" style="display: block;margin-bottom: 8px;">Story Content:</label>
+    <textarea id="storyContent" name="storyContent" rows="10" required th:field="*{content}" style="width: 100%;padding: 8px;margin-bottom: 16px;box-sizing: border-box;"></textarea>
 
-
-
-    <label for="storyContent">Story Content:</label>
-    <textarea id="storyContent" name="storyContent" rows="8" required th:field="*{content}"></textarea>
-
-    <button type="submit">Create Story</button>
+    <button type="submit" style=" background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;">Create Story</button>
 </form>
 
 </body>

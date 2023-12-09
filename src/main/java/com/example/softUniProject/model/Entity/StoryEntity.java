@@ -1,19 +1,19 @@
 package com.example.softUniProject.model.Entity;
 
 import com.example.softUniProject.model.Enums.GenresEnum;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "story")
 public class StoryEntity extends BaseEntity {
-
+    @Column(nullable = false)
     private String authorName;
+    @Column(nullable = false)
     private String storyName;
+    @Column(nullable = false)
     private String storyContent;
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private GenresEnum genre;
 
     public String getAuthorName() {

@@ -1,4 +1,4 @@
-Insert into `user_entity` (id, email, is_active, password, username)
+Insert into `user_entity` (id , email, is_active, password, username)
 values (1,'maikimn@abv.bg' , 1, '40b8c1eea216cc7babec8f132663e0109da46e8059c3b662782640a9dfe181a12d1090e51fdd56eb0f7a23af6f1d4001', 'm1kl3'),
  (2,'maiki03@abv.bg' , 1, '40b8c1eea216cc7babec8f132663e0109da46e8059c3b662782640a9dfe181a12d1090e51fdd56eb0f7a23af6f1d4001', 'mik');
 

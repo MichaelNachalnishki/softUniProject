@@ -4,13 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url("https://static.vecteezy.com/system/resources/previews/025/322/438/non_2x/weathered-antique-wallpaper-with-spotted-stains-and-rusty-frame-generated-by-ai-free-photo.jpg"); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
 
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.8); /* Adjust background color opacity */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input {
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #remember-me {
+            margin-left: 5px;
+        }
+    </style>
 </head>
 <body>
 
 <div class="login-container">
     <h2>Login</h2>
-    <form th:action="@{/login}" th:method="post">
+    <form th:action="@{/login}" method="post">
         <label for="email">Email:</label>
         <input type="text" id="email" name="email" required>
 
@@ -18,14 +85,11 @@
         <input type="password" id="password" name="password" required>
 
         <div>
-            <lable for="remember-me">Remember me</lable>
+            <label for="remember-me">Remember me</label>
             <input type="checkbox" id="remember-me" name="remember-me" class="form-control">
-
         </div>
 
         <button type="submit">Login</button>
-
-
     </form>
 </div>
 
